@@ -1,0 +1,9 @@
+# Goal
+int64 target
+float64 period
+---
+# Result
+int64 count
+---
+# Feedback
+int64 count
