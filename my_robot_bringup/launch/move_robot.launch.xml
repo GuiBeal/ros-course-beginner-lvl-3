@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="lifecycle_cpp" exec="move_robot_server" name="move_robot_a_server">
+    <param name="robot_name" value="robot_a" />
+  </node>
+  <node pkg="lifecycle_cpp" exec="move_robot_server" name="move_robot_b_server">
+    <param name="robot_name" value="robot_b" />
+  </node>
+  <node pkg="lifecycle_cpp" exec="move_robot_startup">
+    <param name="managed_node_names" value="['move_robot_a_server', 'move_robot_b_server']" />
+  </node>
+</launch>
