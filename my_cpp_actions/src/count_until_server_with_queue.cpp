@@ -18,8 +18,8 @@ public:
     pActionServer_ =
         rclcpp_action::create_server<my_robot_interfaces::action::CountUntil>(
             this, "count_until",
-            std::bind(&CountUntilServerNode::cbGoal, this, _1, _2),
-            std::bind(&CountUntilServerNode::cbCancel, this, _1),
+            std::bind(&CountUntilServerNode::cbHandleGoal, this, _1, _2),
+            std::bind(&CountUntilServerNode::cbHandleCancel, this, _1),
             std::bind(&CountUntilServerNode::cbHandleAccepted, this, _1),
             rcl_action_server_get_default_options(),
             pCallbackGroup_);
@@ -33,7 +33,7 @@ public:
   }
 
 private:
-  rclcpp_action::GoalResponse cbGoal(const rclcpp_action::GoalUUID & /*uuid*/, my_robot_interfaces::action::CountUntil::Goal::ConstSharedPtr pGoal)
+  rclcpp_action::GoalResponse cbHandleGoal(const rclcpp_action::GoalUUID & /*uuid*/, my_robot_interfaces::action::CountUntil::Goal::ConstSharedPtr pGoal)
   {
     RCLCPP_INFO(this->get_logger(), "Received a goal.");
 
@@ -53,7 +53,7 @@ private:
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
   }
 
-  rclcpp_action::CancelResponse cbCancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<my_robot_interfaces::action::CountUntil>> /*pGoalHandle*/)
+  rclcpp_action::CancelResponse cbHandleCancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<my_robot_interfaces::action::CountUntil>> /*pGoalHandle*/)
   {
     RCLCPP_INFO(this->get_logger(), "Received a cancel request.");
     return rclcpp_action::CancelResponse::ACCEPT;
