@@ -8,7 +8,8 @@
       "includePath": [
         "/usr/include/**",
         "/opt/ros/jazzy/include/**",
-        "../install/**/include/**"
+        "../install/**/include/**",
+        "./**/include/**"
       ],
       "name": "ROS",
       "intelliSenseMode": "gcc-x64",
