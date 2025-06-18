@@ -1,15 +1,14 @@
-#include "rclcpp/rclcpp.hpp"
-#include "rclcpp_lifecycle/lifecycle_node.hpp"
-#include "example_interfaces/msg/int64.hpp"
+#include <rclcpp/rclcpp.hpp>
+#include <rclcpp_lifecycle/lifecycle_node.hpp>
+#include <example_interfaces/msg/int64.hpp>
 
 using LifecycleCallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
-class NumberPublisherNode : public rclcpp_lifecycle::LifecycleNode
+class NumberPublisher : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  NumberPublisherNode() : LifecycleNode("number_publisher")
+  NumberPublisher() : LifecycleNode("number_publisher")
   {
-
     RCLCPP_INFO(this->get_logger(), "Number publisher started.");
   }
 
@@ -63,7 +62,7 @@ private:
     number_ = 1;
     pNumberPublisher_ = this->create_publisher<example_interfaces::msg::Int64>("number", 10);
     pNumberTimer_ = this->create_wall_timer(std::chrono::milliseconds(static_cast<int>(1000 / publishFrequency_)),
-                                            std::bind(&NumberPublisherNode::publishNumber, this));
+                                            std::bind(&NumberPublisher::publishNumber, this));
     pNumberTimer_->cancel();
   }
 
@@ -103,7 +102,7 @@ int main(int argc, char **argv)
 {
   rclcpp::init(argc, argv);
 
-  auto pNode = std::make_shared<NumberPublisherNode>();
+  auto pNode = std::make_shared<NumberPublisher>();
   rclcpp::spin(pNode->get_node_base_interface());
 
   rclcpp::shutdown();

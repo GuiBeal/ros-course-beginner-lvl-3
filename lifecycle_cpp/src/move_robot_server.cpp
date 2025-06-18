@@ -60,11 +60,11 @@ private:
   {
     this->declare_parameter("robot_name", "robot");
 
-    robot_name_ = this->get_parameter("robot_name").as_string();
+    robotName_ = this->get_parameter("robot_name").as_string();
 
     pCallbackGroup_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
     pActionServer_ = rclcpp_action::create_server<MoveRobotAction>(
-        this, "move_" + robot_name_,
+        this, "move_" + robotName_,
         std::bind(&MoveRobotServerNode::cbHandleGoal, this, _1, _2),
         std::bind(&MoveRobotServerNode::cbHandleCancel, this, _1),
         std::bind(&MoveRobotServerNode::cbHandleAccepted, this, _1),
@@ -76,7 +76,7 @@ private:
   void cleanup()
   {
     this->undeclare_parameter("robot_name");
-    robot_name_ = "robot";
+    robotName_ = "robot";
     pCallbackGroup_.reset();
     pActionServer_.reset();
   }
@@ -214,7 +214,7 @@ private:
     pGoalHandle->succeed(pResult);
   }
 
-  std::string robot_name_;
+  std::string robotName_;
 
   rclcpp_action::Server<MoveRobotAction>::SharedPtr pActionServer_;
   rclcpp::CallbackGroup::SharedPtr pCallbackGroup_;
