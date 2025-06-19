@@ -1,0 +1,6 @@
+geometry_msgs/Twist twist
+int64 duration # seconds
+---
+bool success
+string message
+---
