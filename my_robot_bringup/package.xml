@@ -14,6 +14,7 @@
   <exec_depend>lifecycle_py</exec_depend>
   <exec_depend>component_cpp</exec_depend>
   <exec_depend>turtlesim</exec_depend>
+  <exec_depend>turtlebot3_gazebo</exec_depend>
   <exec_depend>final_project</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
